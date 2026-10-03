@@ -55,10 +55,13 @@ stateDiagram-v2
 
 ## Part A: rules-based PizzaBot (about 30 min)
 
-```bash
-cd labs/lab-04-pizza-bot/starter
-streamlit run app_pizza_bot.py
-```
+Run from the `5350-chatbot` folder:
+
+| Windows | macOS / Linux | Docker |
+|---|---|---|
+| `scripts\run.cmd lab4` | `make lab4` | `make docker-lab4` |
+
+Then open <http://localhost:8501>. You'll edit `labs/lab-04-pizza-bot/starter/app_pizza_bot.py`.
 
 1. **System prompt:** replace `SYSTEM_PROMPT` with a friendly PizzaBot personality.
 2. **Quick actions:** add sidebar buttons (🍕 Pepperoni, 🥦 Veggie, 🌶️ Spicy, 🎉 Party order) that send a message, like BloomBot's `send_message()` in Lab 3.
@@ -73,9 +76,14 @@ streamlit run app_pizza_bot.py
 
 ## Part B: hybrid LLM PizzaBot (about 45 min)
 
-```bash
-streamlit run app_pizza_bot_llm.py
-```
+Run from the `5350-chatbot` folder:
+
+| Windows | macOS / Linux | Docker |
+|---|---|---|
+| `scripts\run.cmd lab4b` | `make lab4b` | `make docker-lab4b` |
+
+You'll edit `labs/lab-04-pizza-bot/starter/app_pizza_bot_llm.py`.
+
 It already runs. Because TODO B2 raises `NotImplementedError`, every turn falls back to regex (you'll see a toast). The sidebar shows the live **order slots**.
 
 - **TODO B1: extraction prompt.** Write `EXTRACTION_PROMPT`. List each key, its allowed values (use `PIZZA_NAMES`), and the rule "use null if not mentioned; never invent values".

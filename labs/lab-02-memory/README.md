@@ -41,10 +41,13 @@ sequenceDiagram
 ## Steps
 
 ### Step 1: Run it
-```bash
-cd labs/lab-02-memory
-streamlit run memory_bot.py
-```
+Run from the `5350-chatbot` folder:
+
+| Windows | macOS / Linux | Docker |
+|---|---|---|
+| `scripts\run.cmd lab2` | `make lab2` | `make docker-lab2` |
+
+Then open <http://localhost:8501>.
 - ✅ **Checkpoint:** tell it your name, then ask for it 3 turns later. It remembers.
 
 ### Step 2: Break it on purpose
@@ -80,6 +83,6 @@ Why is the system prompt added in `get_answer()` *outside* the trimmed history?
 
 | Symptom | Fix |
 |---|---|
-| `ImportError: cannot import name 'get_answer'` | Run `streamlit` from inside `labs/lab-02-memory/` |
+| `ImportError: cannot import name 'get_answer'` | Start it with the launcher (`make lab2` / `scripts\run.cmd lab2`), which runs from the right folder |
 | `AttributeError: st.experimental_rerun` | You're on old code. Use `st.rerun()` |
 | The chart doesn't appear | It shows after the first assistant reply |

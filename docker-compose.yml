@@ -1,0 +1,19 @@
+# Usage (any OS with Docker Desktop):
+#   docker compose run --rm --service-ports labs python run.py lab2
+# or, with make:  make docker-lab2
+services:
+  labs:
+    build: .
+    image: 5350-chatbot
+    working_dir: /app
+    volumes:
+      - .:/app            # live-edit the code on your computer
+    ports:
+      - "${PORT:-8501}:8501"   # Streamlit -> http://localhost:8501 (PORT=8502 to change)
+    environment:
+      - PORT=${PORT:-8501}  # only used to print the right URL
+    env_file:
+      - path: .env        # your OPENAI_API_KEY (copy .env.sample to .env first)
+        required: false
+    stdin_open: true      # needed for the Lab 1 terminal chatbot
+    tty: true

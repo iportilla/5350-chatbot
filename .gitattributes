@@ -1,0 +1,6 @@
+# Keep shell scripts runnable even when cloned on Windows
+*.sh   text eol=lf
+Makefile text eol=lf
+Dockerfile text eol=lf
+*.cmd  text eol=crlf
+*.ps1  text eol=crlf

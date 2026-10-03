@@ -41,10 +41,13 @@ flowchart LR
 
 ### Step 1: Run it
 Use **Chrome** and allow microphone access.
-```bash
-cd labs/lab-06-voice-bot
-streamlit run app.py
-```
+Run from the `5350-chatbot` folder:
+
+| Windows | macOS / Linux | Docker |
+|---|---|---|
+| `scripts\run.cmd lab6` | `make lab6` | `make docker-lab6` |
+
+Then open <http://localhost:8501>. (Docker works too: the microphone is captured by your browser, not by the container.)
 Click the mic, ask a question, and click again to stop.
 - ✅ **Checkpoint:** your words appear as text, and the reply is read aloud.
 
@@ -85,5 +88,5 @@ Pick one:
 |---|---|
 | No audio plays | The browser blocked autoplay. Click anywhere on the page first, or use Chrome |
 | Mic button does nothing | Grant mic permission. On macOS: System Settings → Privacy → Microphone → your browser |
-| `ModuleNotFoundError: audio_recorder_streamlit` | `pip install -r requirements.txt` from the repo root |
+| `ModuleNotFoundError: audio_recorder_streamlit` | Run the setup script again |
 | `temp_audio.mp3` files pile up | Make sure both `os.remove()` calls run (they're in `.gitignore` anyway) |

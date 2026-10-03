@@ -18,3 +18,11 @@ flowchart LR
 | [6: Voice bot](lab-06-voice-bot/) | 2 | 45 min | STT → LLM → TTS cascade, latency | Latency instrumentation; voice persona |
 
 **Before Lab 1:** finish the [one-time setup](../guides/STUDENT_GUIDE.md#1-one-time-setup).
+
+**Running any lab** (from the `5350-chatbot` folder):
+
+| Windows | macOS / Linux | Docker |
+|---|---|---|
+| `scripts\run.cmd lab2` | `make lab2` | `make docker-lab2` |
+
+Targets: `lab1`, `lab1-web`, `lab2`, `lab3`, `lab4`, `lab4b`, `lab5`, `lab6`, `test`, `check`.

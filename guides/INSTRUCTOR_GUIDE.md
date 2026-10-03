@@ -65,11 +65,34 @@ flowchart TB
 
 - [ ] **API access.** Decide on one class key (simpler; set a monthly budget cap in the OpenAI dashboard) or per-student keys (more realistic; students need billing). Project-scoped keys with spending limits are a good middle ground.
 - [ ] **Check the model is still available.** Every lab uses `gpt-4o-mini` (a `MODEL` constant or a `model=` argument). If it's been retired, search and replace it with the current small model.
-- [ ] **Dry run.** In a fresh clone: `pip install -r requirements.txt`, then run each lab's Step 1 and `pytest -q` in Lab 5 (no key needed; the tests are mocked).
+- [ ] **Dry run.** In a fresh clone: `bash scripts/setup.sh` (or `scripts\setup.cmd`), `make ping`, then `make lab1` … `make lab6` and `make test` (no key needed; the tests are mocked). Also try `make docker-build && make docker-test` once.
 - [ ] **Solutions visibility.** The repo is public. See [§8](#solutions-and-academic-integrity).
 - [ ] **Voice lab hardware.** Lab 6 needs a mic and Chrome. Have a backup plan (pair students up, or demo it).
 - [ ] **watsonx (optional).** The slides and `capital-demo.ipynb` in `resources/watsonx/` need IBM Cloud accounts, watsonx.ai Studio + Runtime, and a project ID. Set these up a week ahead if you plan to use them.
 - [ ] **Forum.** Post the troubleshooting table from the Student Guide and ask students to include the lab, step, command and error (never their key).
+
+### Student environments: Windows, macOS, Linux, Docker
+
+Every lab can be started the same way on every platform, so students never need to `cd` into lab folders or activate a venv:
+
+```mermaid
+flowchart LR
+    W["Windows<br/>scripts\run.cmd lab2"] --> PS["run.ps1"] --> R
+    M["macOS / Linux<br/>make lab2"] --> R
+    SH["bash scripts/run.sh lab2"] --> R
+    D["Docker<br/>make docker-lab2"] --> C["docker compose run"] --> R
+    R["run.py lab2<br/>(right folder, right Python)"] --> ST["streamlit run memory_bot.py"]
+```
+
+| Path | Setup | Good for | Watch out for |
+|---|---|---|---|
+| **Windows, native** | `scripts\setup.cmd` (double-clickable) | Most Windows students | "Add python.exe to PATH" unticked; the Microsoft Store `python` alias; Notepad saving `.env.txt` |
+| **macOS/Linux, native** | `bash scripts/setup.sh`, then `make` | Most students | Ubuntu needs `python3-venv`; macOS needs `xcode-select --install` for `make` |
+| **Docker** | `.env` + `make docker-build` (or `docker compose build`) | Locked-down laptops, broken Python installs, identical environments | Docker Desktop must be running; on Windows it needs WSL 2; port 8501 conflicts (`PORT=8502`) |
+
+**`run.py check` is your first-line support tool.** Ask students to paste its output (it masks the key to the last 4 characters) when they ask for help. `check --ping` makes one tiny API call to confirm billing and network.
+
+**Suggested first-day plan for mixed-experience classes:** have students run the setup *before* the first session as homework, then spend the first 10 minutes of the session fixing `[FAIL]` lines in pairs. Anyone still stuck after 10 minutes switches to Docker, or pairs with a neighbour for the day.
 
 **Cost estimate.** A whole class running all labs on `gpt-4o-mini` typically costs a few dollars in total. The main risks are runaway agent loops and long TTS output. Check current pricing before the term and set a budget cap.
 
@@ -213,8 +236,11 @@ Automatic deductions: committing an API key (−25% and the key must be rotated)
 |---|---|---|
 | Works for you, fails for students with `Missing OPENAI_API_KEY` | Older materials used lowercase `openai_api_key` | Everything now uses `OPENAI_API_KEY`; check their `.env` |
 | `st.experimental_rerun` AttributeError | Removed in newer Streamlit | Already replaced with `st.rerun()` here |
-| Streamlit `ImportError: utils` | Ran from the repo root | `cd` into the lab folder |
-| Lab 5 tests fail with `ModuleNotFoundError: reasoning_agent` | Ran pytest from the repo root | `cd labs/lab-05-reasoning-agent && pytest -q` |
+| Streamlit `ImportError: utils` | Started `streamlit run` by hand from the wrong folder | Use the launchers (`make labN` / `scripts\run.cmd labN`) |
+| Lab 5 tests fail with `ModuleNotFoundError: reasoning_agent` | Ran pytest from the repo root | `make test` / `scripts\run.cmd test` |
+| Windows: `'python' is not recognized` | PATH box unticked at install | Reinstall Python with "Add python.exe to PATH"; disable the Store alias |
+| Windows: `running scripts is disabled` | PowerShell execution policy | Use the `.cmd` wrappers, which bypass it for that one script only |
+| Docker: `port is already allocated` | Something already on 8501 | `make docker-lab2 PORT=8502` |
 | Lab 6: no sound | Browser autoplay policy | Click the page first; use Chrome |
 | 429 errors mid-class | Shared key rate limit | Stagger demos, use per-student project keys, or raise the limit |
 | `NotFoundError: model` | Model retired | Update the `MODEL` constants |
@@ -236,3 +262,4 @@ So you know what differs from earlier semesters:
 - **Voice** folders merged into Lab 6 (`voice/` and `voice_code/` were identical); upgraded from `gpt-3.5-turbo` to `gpt-4o-mini`.
 - **Removed** committed `.env` files and `__pycache__`; added `.gitignore`. Notebook outputs were cleared.
 - The LangChain math-agent notebook moved to Lab 5 as a bonus comparison.
+- **Cross-platform tooling:** `run.py` launcher and setup check, setup and run scripts for macOS/Linux (`.sh`) and Windows (`.ps1` + double-clickable `.cmd`), a `Makefile`, and a `Dockerfile` + `docker-compose.yml`.

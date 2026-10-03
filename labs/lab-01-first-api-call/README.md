@@ -40,17 +40,23 @@ flowchart TD
 ## Steps
 
 ### Step 0: Setup (once for the whole course)
-Follow the [Student Guide setup](../../guides/STUDENT_GUIDE.md#1-one-time-setup). Make sure `.env` in the repo root contains `OPENAI_API_KEY=...`.
+Follow the [Student Guide setup](../../guides/STUDENT_GUIDE.md#1-one-time-setup) for Windows, macOS, Linux or Docker. You're ready when the setup check prints `All good!`:
+
+| Windows | macOS / Linux | Docker |
+|---|---|---|
+| `scripts\run.cmd check` | `make check` | `make docker-check` |
 
 ### Step 1: One call in a notebook
-Open `first_call.ipynb` and run every cell.
+Open `first_call.ipynb` in VS Code, choose the `.venv` Python as the kernel (top-right), and run every cell. *(Docker users: skip to Step 2, or run the same code in `make docker-shell` → `python`.)*
 - ✅ **Checkpoint:** you see "Buenos Aires" (or similar) printed.
 - Look at the response object. Find `usage.prompt_tokens` and `usage.completion_tokens`.
 
 ### Step 2: Terminal chatbot
-```bash
-python labs/lab-01-first-api-call/cli_chat.py
-```
+Run from the `5350-chatbot` folder:
+
+| Windows | macOS / Linux | Docker |
+|---|---|---|
+| `scripts\run.cmd lab1` | `make lab1` | `make docker-lab1` |
 Chat for a few turns. Tell it your name, then ask for it back.
 - ✅ **Checkpoint:** the bot remembers your name. **Why?** Find the line in `cli_chat.py` that makes this happen.
 
@@ -59,9 +65,13 @@ In `cli_chat.py`, swap the system message for one from the comment list (pirate,
 - ✅ **Checkpoint:** the tone changes completely, and you changed only one string.
 
 ### Step 4: Web chatbot with no memory
-```bash
-streamlit run labs/lab-01-first-api-call/web_chat.py
-```
+Run from the `5350-chatbot` folder:
+
+| Windows | macOS / Linux | Docker |
+|---|---|---|
+| `scripts\run.cmd lab1-web` | `make lab1-web` | `make docker-lab1-web` |
+
+Then open <http://localhost:8501>.
 Tell it your name, then ask "What's my name?".
 - ✅ **Checkpoint:** it **doesn't** know. Compare the `messages=[...]` passed in `web_chat.py` with the one in `cli_chat.py`. Write one sentence explaining the difference.
 
@@ -84,7 +94,7 @@ In `cli_chat.py`, ask "Write a one-line slogan for a coffee shop" three times at
 
 | Symptom | Fix |
 |---|---|
-| `Missing OPENAI_API_KEY` | `.env` is missing, misnamed or in the wrong folder. Run from the repo root, or put `.env` next to the script |
+| `Missing OPENAI_API_KEY` | `.env` is missing, misnamed or in the wrong folder. Run `scripts\run.cmd check` / `make check` |
 | `AuthenticationError 401` | The key is wrong or revoked. Make a new one |
 | `RateLimitError 429` / `insufficient_quota` | Your account has no credit. Ask your instructor |
-| `ModuleNotFoundError: openai` | Activate your venv: `source .venv/bin/activate` |
+| `ModuleNotFoundError: openai` | Use the launcher (`scripts\run.cmd lab1` / `make lab1`), or run the setup script again |

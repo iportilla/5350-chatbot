@@ -35,17 +35,36 @@ flowchart LR
 
 ## Quick start
 
-```bash
-git clone https://github.com/iportilla/5350-chatbot.git
-cd 5350-chatbot
-python3 -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.sample .env                # then paste your OPENAI_API_KEY into .env
-python labs/lab-01-first-api-call/cli_chat.py
-```
+Works on **Windows, macOS and Linux**, with or without Docker. New to the command line? The [Student Guide](guides/STUDENT_GUIDE.md#1-one-time-setup) walks you through it step by step.
 
-Full setup instructions and troubleshooting are in the [Student Guide](guides/STUDENT_GUIDE.md).
+**1. Get the code:** `git clone https://github.com/iportilla/5350-chatbot.git`, or click **Code → Download ZIP** above and unzip it.
+
+**2. Set up once** (it asks for your OpenAI API key):
+
+| 🪟 Windows (PowerShell) | 🍎 macOS / 🐧 Linux | 🐳 Docker (any OS) |
+|---|---|---|
+| `scripts\setup.cmd` | `bash scripts/setup.sh` | copy `.env.sample` to `.env`, add your key, then `make docker-build` |
+
+**3. Run a lab:**
+
+| 🪟 Windows | 🍎 macOS / 🐧 Linux | 🐳 Docker |
+|---|---|---|
+| `scripts\run.cmd lab1` | `make lab1` | `make docker-lab1` |
+
+Run `scripts\run.cmd` or `make help` to list every lab. Web labs open at <http://localhost:8501>.
+
+<details>
+<summary>What's under the hood?</summary>
+
+| File | Role |
+|---|---|
+| [`run.py`](run.py) | Cross-platform launcher: `python run.py lab2` starts the right file in the right folder; `python run.py check` diagnoses setup problems |
+| [`scripts/setup.sh`](scripts/setup.sh) · [`scripts/setup.ps1`](scripts/setup.ps1) (+ `setup.cmd`) | Create `.venv`, install packages, write `.env`, run the check |
+| [`scripts/run.sh`](scripts/run.sh) · [`scripts/run.ps1`](scripts/run.ps1) (+ `run.cmd`) | Run `run.py` with the `.venv` Python, so there's nothing to activate |
+| [`Makefile`](Makefile) | `make setup`, `make lab2`, `make test`, `make docker-lab2`, … |
+| [`Dockerfile`](Dockerfile) · [`docker-compose.yml`](docker-compose.yml) | Container with all dependencies; the repo is mounted live and port 8501 is published |
+
+</details>
 
 > 🔐 **Never commit your `.env` file.** It's already in `.gitignore`. If you leak a key, revoke it right away in the OpenAI dashboard.
 

@@ -62,10 +62,13 @@ sequenceDiagram
 ## Steps
 
 ### Step 1: Run the agent
-```bash
-cd labs/lab-05-reasoning-agent
-streamlit run app.py
-```
+Run from the `5350-chatbot` folder:
+
+| Windows | macOS / Linux | Docker |
+|---|---|---|
+| `scripts\run.cmd lab5` | `make lab5` | `make docker-lab5` |
+
+Then open <http://localhost:8501>.
 Try these and expand each reasoning step:
 1. `What is 15 times 23?`
 2. `A store sells 15 items per day. How many in 6 days?`
@@ -98,9 +101,11 @@ Re-run problems 4 and 5, and try `What is 10 divided by 0?`
 - ✅ **Checkpoint:** the reasoning steps now show `add` and `divide` being called, and the divide-by-zero case gets a sensible reply instead of crashing.
 
 ### Step 5: Test without spending tokens
-```bash
-pytest -q
-```
+Run from the `5350-chatbot` folder:
+
+| Windows | macOS / Linux | Docker |
+|---|---|---|
+| `scripts\run.cmd test` | `make test` | `make docker-test` |
 Then add a property test to `reasoning_agent/test_tools.py`:
 ```python
 @given(a=st.floats(allow_nan=False, allow_infinity=False),
@@ -135,6 +140,6 @@ Set `self.max_iterations = 1` and run problem 3.
 | Symptom | Fix |
 |---|---|
 | `OPENAI_API_KEY not found` | `.env` needs `OPENAI_API_KEY=...` (capital letters) |
-| `ModuleNotFoundError: reasoning_agent` | Run from inside `labs/lab-05-reasoning-agent/` |
+| `ModuleNotFoundError: reasoning_agent` | Use `make lab5` / `make test` (or `scripts\run.cmd lab5` / `test`), which run from the right folder |
 | `An assistant message with 'tool_calls' must be followed by tool messages` | Every tool call needs a matching `role: "tool"` message with its `tool_call_id` |
-| `ModuleNotFoundError: hypothesis` | `pip install -r requirements.txt` from the repo root |
+| `ModuleNotFoundError: hypothesis` | Run the setup script again |

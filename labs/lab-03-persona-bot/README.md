@@ -38,10 +38,13 @@ flowchart LR
 ## Steps
 
 ### Step 1: Run BloomBot
-```bash
-cd labs/lab-03-persona-bot
-streamlit run bloom_bot.py
-```
+Run from the `5350-chatbot` folder:
+
+| Windows | macOS / Linux | Docker |
+|---|---|---|
+| `scripts\run.cmd lab3` | `make lab3` | `make docker-lab3` |
+
+Then open <http://localhost:8501>.
 Click each sidebar button, then type your own request.
 - ✅ **Checkpoint:** you get 2–3 options with approximate prices.
 
