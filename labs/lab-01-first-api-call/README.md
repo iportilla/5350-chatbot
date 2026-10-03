@@ -40,7 +40,7 @@ flowchart TD
 ## Steps
 
 ### Step 0: Setup (once for the whole course)
-Follow the [Student Guide setup](../../guides/STUDENT_GUIDE.md#1-one-time-setup) for Windows, macOS, Linux or Docker. You're ready when the setup check prints `All good!`:
+Follow the setup guide for your computer: [Windows](../../guides/WINDOWS_README.md) · [macOS / Linux / Docker](../../guides/STUDENT_GUIDE.md#1-one-time-setup). You're ready when the setup check prints `All good!`:
 
 | Windows | macOS / Linux | Docker |
 |---|---|---|

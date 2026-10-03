@@ -17,7 +17,7 @@ flowchart LR
 | [5: Reasoning agent](lab-05-reasoning-agent/) | 2 | 75 min | Tool calling, ReAct loop, termination, testing | New tools + property test |
 | [6: Voice bot](lab-06-voice-bot/) | 2 | 45 min | STT → LLM → TTS cascade, latency | Latency instrumentation; voice persona |
 
-**Before Lab 1:** finish the [one-time setup](../guides/STUDENT_GUIDE.md#1-one-time-setup).
+**Before Lab 1:** finish the one-time setup: [Windows](../guides/WINDOWS_README.md) · [macOS / Linux / Docker](../guides/STUDENT_GUIDE.md#1-one-time-setup).
 
 **Running any lab** (from the `5350-chatbot` folder):
 

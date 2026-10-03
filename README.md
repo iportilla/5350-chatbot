@@ -22,6 +22,7 @@ flowchart LR
 | [`lectures/`](lectures/) | Two lectures with diagrams, demos and discussion questions | Everyone |
 | [`labs/`](labs/) | Six self-contained labs, each with a README and code | Students |
 | [`guides/STUDENT_GUIDE.md`](guides/STUDENT_GUIDE.md) | Setup, workflow, submission, troubleshooting | Students |
+| [`guides/WINDOWS_README.md`](guides/WINDOWS_README.md) | Beginner-friendly Windows setup, from installing Python to running labs | Windows students |
 | [`guides/INSTRUCTOR_GUIDE.md`](guides/INSTRUCTOR_GUIDE.md) | Schedule, teaching notes, answer keys, rubric | Instructors |
 | [`solutions/`](solutions/) | Reference solutions for the coding tasks | Instructors |
 | [`resources/`](resources/) | Chatbot planning guide, LLM parameters handout, watsonx slides, spec-driven dev case study | Everyone |
@@ -35,7 +36,10 @@ flowchart LR
 
 ## Quick start
 
-Works on **Windows, macOS and Linux**, with or without Docker. New to the command line? The [Student Guide](guides/STUDENT_GUIDE.md#1-one-time-setup) walks you through it step by step.
+Works on **Windows, macOS and Linux**, with or without Docker. New to the command line? Follow a step-by-step guide:
+
+- 🪟 **Windows:** [Windows Setup Guide](guides/WINDOWS_README.md)
+- 🍎🐧 **macOS / Linux:** [Student Guide, setup section](guides/STUDENT_GUIDE.md#1-one-time-setup)
 
 **1. Get the code:** `git clone https://github.com/iportilla/5350-chatbot.git`, or click **Code → Download ZIP** above and unzip it.
 

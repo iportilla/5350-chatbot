@@ -28,6 +28,8 @@ flowchart TD
 
 Both options give you the same labs. You only do this once.
 
+> 🪟 **On Windows?** The [Windows Setup Guide](WINDOWS_README.md) covers all of this in more detail, including PowerShell basics, OneDrive and Notepad pitfalls, and Windows-only troubleshooting.
+
 ### 1.0 New to the command line? Read this first (5 min)
 
 The **terminal** (also called the command line, shell or console) is a window where you type commands instead of clicking. You'll only need a handful of them.
@@ -79,6 +81,8 @@ Your instructor will tell you whether to use a **class key** or create your own 
 
 <details open>
 <summary><b>🪟 Windows</b></summary>
+
+*Step-by-step walkthrough for beginners: [Windows Setup Guide](WINDOWS_README.md).*
 
 1. **Install Python 3.10+** from <https://www.python.org/downloads/windows/>.
    ⚠️ On the first installer screen, **tick "Add python.exe to PATH"**, then click *Install Now*.

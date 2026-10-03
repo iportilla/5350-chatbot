@@ -90,6 +90,8 @@ flowchart LR
 | **macOS/Linux, native** | `bash scripts/setup.sh`, then `make` | Most students | Ubuntu needs `python3-venv`; macOS needs `xcode-select --install` for `make` |
 | **Docker** | `.env` + `make docker-build` (or `docker compose build`) | Locked-down laptops, broken Python installs, identical environments | Docker Desktop must be running; on Windows it needs WSL 2; port 8501 conflicts (`PORT=8502`) |
 
+Point Windows students to [`WINDOWS_README.md`](WINDOWS_README.md). It assumes no terminal experience and covers the Windows-specific traps (PATH checkbox, Store alias, OneDrive, `.env.txt`, firewall prompt, `Terminate batch job`).
+
 **`run.py check` is your first-line support tool.** Ask students to paste its output (it masks the key to the last 4 characters) when they ask for help. `check --ping` makes one tiny API call to confirm billing and network.
 
 **Suggested first-day plan for mixed-experience classes:** have students run the setup *before* the first session as homework, then spend the first 10 minutes of the session fixing `[FAIL]` lines in pairs. Anyone still stuck after 10 minutes switches to Docker, or pairs with a neighbour for the day.
