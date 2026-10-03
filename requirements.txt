@@ -1,0 +1,12 @@
+# Core (Labs 1–5)
+openai>=1.40
+streamlit>=1.37
+python-dotenv>=1.0
+
+# Lab 6 — voice
+audio-recorder-streamlit
+streamlit-float
+
+# Lab 5 — tests
+pytest
+hypothesis>=6.0,<6.100
