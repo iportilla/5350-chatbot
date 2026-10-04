@@ -7,6 +7,7 @@ from openai import OpenAI
 
 # Installation reminders:
 # pip install openai python-dotenv
+# python lab-01-first-api-call/cli_chat.py
 
 # .venv/bin/python -m pip install openai python-dotenv
 # python labs/lab-01-first-api-call/cli_chat.py
@@ -22,9 +23,10 @@ if not api_key:
 client = OpenAI(api_key=api_key)
 
 #Conversation history (system message defines assistant behavior)
-messages = [
-    {"role": "system", "content": "You are a helpful, concise assistant."}
-]
+KEEP_HISTORY = True  # False = stateless: the model forgets earlier turns
+# KEEP_HISTORY = False # = stateless: the model forgets earlier turns
+SYSTEM_MESSAGE = {"role": "system", "content": "You are a helpful, concise assistant."}
+messages = [SYSTEM_MESSAGE]
 
 #https://platform.openai.com/chat
 #Themes for system messages:
@@ -52,8 +54,12 @@ try:
         if user_input.lower() == "quit":
             break
 
-        # Add the user message to history
-        messages.append({"role": "user", "content": user_input})
+        if KEEP_HISTORY:
+            # Add the user message to the running history
+            messages.append({"role": "user", "content": user_input})
+        else:
+            # No history: only the system prompt + the current message are sent
+            messages = [SYSTEM_MESSAGE, {"role": "user", "content": user_input}]
 
         # Call OpenAI for a response
         try:
@@ -65,13 +71,15 @@ try:
             assistant_msg = response.choices[0].message.content
         except Exception as e:
             # Roll back last user message if the call fails
-            messages.pop()
+            if KEEP_HISTORY:
+                messages.pop()
             print(f"Assistant (error): {e}")
             continue
 
         #Print and store assistant reply
         print(f"Assistant: {assistant_msg}\n")
-        messages.append({"role": "assistant", "content": assistant_msg})
+        if KEEP_HISTORY:
+            messages.append({"role": "assistant", "content": assistant_msg})
 
 #Graceful exit
 except (KeyboardInterrupt, EOFError):
